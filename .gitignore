@@ -1,0 +1,69 @@
+# Visual Studio
+.vs/
+.vscode/
+.idea/
+
+# Build results
+bin/
+obj/
+Debug/
+Release/
+x64/
+x86/
+[Bb]in/
+[Oo]bj/
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.userprefs
+
+# Rider
+.idea/
+*.sln.iml
+
+# Visual Studio cache/options
+.vs/
+
+# Test Results
+TestResults/
+*.trx
+
+# NuGet
+*.nupkg
+*.snupkg
+.nuget/
+
+# Local environment
+.env
+.env.local
+.env.*.local
+
+# OS specific
+.DS_Store
+Thumbs.db
+*.log
+
+# IDE
+*.swp
+*.swo
+*~
+
+# Backup files
+*.bak
+*.backup
+*.tmp
+
+# Application specific
+restorepoint.cfg
+*.cfg
+*.ini
+
+# Misc
+.classpath
+.c9/
+*.class
+*.jar
