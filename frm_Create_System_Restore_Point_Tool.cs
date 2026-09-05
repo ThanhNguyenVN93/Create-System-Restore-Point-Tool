@@ -232,16 +232,65 @@ namespace WindowsFormsApp1
                     if (!string.IsNullOrEmpty(output))
                     {
                         lblProtectionStatus.Text = "✓ System Protection: Enabled on C:";
+                        btnFixProtection.Visible = false;
                     }
                     else
                     {
                         lblProtectionStatus.Text = "⚠ System Protection: Disabled or No Restore Points";
+                        btnFixProtection.Visible = true;
                     }
                 }
             }
             catch
             {
                 lblProtectionStatus.Text = "⚠ Unable to check System Protection";
+                btnFixProtection.Visible = true;
+            }
+        }
+
+        private void btnFixProtection_Click(object sender, EventArgs e)
+        {
+            var confirm = MessageBox.Show(
+                "Thao tác này sẽ bật System Protection (System Restore) trên ổ C:.\nBạn sẽ được yêu cầu xác nhận UAC.\n\nTiếp tục?",
+                "Enable System Protection",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (confirm != DialogResult.Yes)
+                return;
+
+            try
+            {
+                btnFixProtection.Enabled = false;
+                btnCreate.Enabled = false;
+                this.Cursor = Cursors.WaitCursor;
+                lblProtectionStatus.Text = "⏳ Enabling System Protection...";
+
+                int exitCode = RunElevatedScript("Enable-ComputerRestore -Drive 'C:\\' -ErrorAction Stop; exit $LASTEXITCODE");
+
+                if (exitCode == 0)
+                {
+                    MessageBox.Show(
+                        "✓ Đã bật System Protection trên ổ C:.",
+                        "Success",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show(
+                        $"✕ Không thể bật System Protection (Error: {exitCode}).\n\nBạn có thể bật thủ công qua System Properties > System Protection.",
+                        "Failed",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+                }
+            }
+            finally
+            {
+                this.Cursor = Cursors.Default;
+                btnFixProtection.Enabled = true;
+                CheckCreateRestriction();
+                CheckSystemProtection();
             }
         }
 
@@ -276,8 +325,8 @@ namespace WindowsFormsApp1
                 lblStatus.Text = "Creating restore point... Please wait.";
                 this.Cursor = Cursors.WaitCursor;
 
-                int exitCode = RunElevatedWithExitCode("powershell.exe", 
-                    $"-NoProfile -ExecutionPolicy Bypass -Command \"Checkpoint-Computer -Description '{escapedDescription}' -RestorePointType 'Manual' -ErrorAction Stop\"");
+                int exitCode = RunElevatedScript(
+                    $"Checkpoint-Computer -Description '{escapedDescription}' -RestorePointType 'Manual' -ErrorAction Stop; exit $LASTEXITCODE");
 
                 progressBar.Visible = false;
 
@@ -344,7 +393,7 @@ namespace WindowsFormsApp1
             this.Close();
         }
 
-        private int RunElevatedWithExitCode(string fileName, string arguments)
+        private int RunElevatedScript(string scriptContent)
         {
             try
             {
@@ -354,7 +403,6 @@ namespace WindowsFormsApp1
                     $"restore_{Guid.NewGuid().ToString().Substring(0, 8)}.ps1"
                 );
 
-                string scriptContent = $"Checkpoint-Computer -Description 'Manual_Restore_{DateTime.Now:ddMMyyyy_HHmm}' -RestorePointType Manual -ErrorAction Stop; exit $LASTEXITCODE";
                 System.IO.File.WriteAllText(scriptPath, scriptContent);
 
                 var psi = new ProcessStartInfo("powershell.exe")

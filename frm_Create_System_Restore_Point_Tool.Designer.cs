@@ -22,6 +22,7 @@ namespace WindowsFormsApp1
             this.lblProtectionStatus = new System.Windows.Forms.Label();
             this.lblDiskSpace = new System.Windows.Forms.Label();
             this.lblWindowsVersion = new System.Windows.Forms.Label();
+            this.btnFixProtection = new System.Windows.Forms.Button();
             this.btnCreate = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.progressBar = new System.Windows.Forms.ProgressBar();
@@ -56,6 +57,7 @@ namespace WindowsFormsApp1
             this.groupSystemStatus.Controls.Add(this.lblWindowsVersion);
             this.groupSystemStatus.Controls.Add(this.lblDiskSpace);
             this.groupSystemStatus.Controls.Add(this.lblProtectionStatus);
+            this.groupSystemStatus.Controls.Add(this.btnFixProtection);
             this.groupSystemStatus.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.groupSystemStatus.Location = new System.Drawing.Point(20, 120);
             this.groupSystemStatus.Name = "groupSystemStatus";
@@ -71,6 +73,16 @@ namespace WindowsFormsApp1
             this.lblProtectionStatus.Size = new System.Drawing.Size(178, 15);
             this.lblProtectionStatus.TabIndex = 3;
             this.lblProtectionStatus.Text = "✓ System Protection: Checking...";
+
+            this.btnFixProtection.Font = new System.Drawing.Font("Segoe UI", 7.5F);
+            this.btnFixProtection.Location = new System.Drawing.Point(255, 25);
+            this.btnFixProtection.Name = "btnFixProtection";
+            this.btnFixProtection.Size = new System.Drawing.Size(95, 22);
+            this.btnFixProtection.TabIndex = 8;
+            this.btnFixProtection.Text = "🛠️ Enable";
+            this.btnFixProtection.UseVisualStyleBackColor = true;
+            this.btnFixProtection.Visible = false;
+            this.btnFixProtection.Click += new System.EventHandler(this.btnFixProtection_Click);
 
             this.lblDiskSpace.AutoSize = true;
             this.lblDiskSpace.Font = new System.Drawing.Font("Segoe UI", 9F);
@@ -155,6 +167,7 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.TextBox txtDescription;
         private System.Windows.Forms.GroupBox groupSystemStatus;
         private System.Windows.Forms.Label lblProtectionStatus;
+        private System.Windows.Forms.Button btnFixProtection;
         private System.Windows.Forms.Label lblDiskSpace;
         private System.Windows.Forms.Label lblWindowsVersion;
         private System.Windows.Forms.Button btnCreate;
