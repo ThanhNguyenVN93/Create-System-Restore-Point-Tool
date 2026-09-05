@@ -51,18 +51,18 @@ A professional Windows Forms application that makes creating system restore poin
 - **System Protection enabled** on C: drive
 
 ### Download
-1. Download the latest release from [Releases](https://github.com/yourusername/SystemRestorePointCreator/releases)
+1. Download the latest release from [Releases](https://github.com/ThanhNguyenVN93/Create-System-Restore-Point-Tool/releases)
 2. Extract the files
-3. Run `WindowsFormsApp1.exe`
+3. Run `Create System Restore Point Tool.exe`
 
 ### Build from Source
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/SystemRestorePointCreator.git
-cd SystemRestorePointCreator
+git clone https://github.com/ThanhNguyenVN93/Create-System-Restore-Point-Tool.git
+cd Create-System-Restore-Point-Tool
 
 # Build with Visual Studio 2022+
-# Open WindowsFormsApp1.sln
+# Open frm_sys_rest_tool.slnx
 # Press Ctrl+Shift+B to build
 # Press F5 to run
 ```
@@ -70,7 +70,7 @@ cd SystemRestorePointCreator
 ## 📋 Usage
 
 ### Basic Usage
-1. **Launch the application** - Run `WindowsFormsApp1.exe`
+1. **Launch the application** - Run `Create System Restore Point Tool.exe`
 2. **(Optional) Enter custom description** - Default is "Manual Restore Point"
 3. **Click "Create Restore Point"** button
 4. **Approve UAC prompt** - Admin elevation is required
@@ -160,7 +160,7 @@ Remove-Item -Path "$env:APPDATA\WindowsFormsApp1\restorepoint.cfg" -Force
 
 ### Problem: "Access Denied" error
 **Solution:** Run as Administrator
-1. Right-click `WindowsFormsApp1.exe`
+1. Right-click `Create System Restore Point Tool.exe`
 2. Select "Run as administrator"
 3. Retry creating restore point
 
@@ -181,7 +181,7 @@ Remove-Item -Path "$env:APPDATA\WindowsFormsApp1\restorepoint.cfg" -Force
 
 ### Code Structure
 ```
-Form1.cs
+frm_Create_System_Restore_Point_Tool.cs
 ├─ Form1_Load()              - Initialize and check restrictions
 ├─ CheckCreateRestriction()  - 3-month limitation check
 ├─ CheckSystemStatus()       - Display system information
@@ -190,7 +190,7 @@ Form1.cs
 ├─ RunElevatedWithExitCode() - Execute PowerShell as admin
 └─ SetFormIcon()             - Load and set application icon
 
-Form1.Designer.cs
+frm_Create_System_Restore_Point_Tool.Designer.cs
 └─ InitializeComponent()     - UI layout and styling
 ```
 
@@ -226,8 +226,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📞 Support
 
 For issues, questions, or suggestions:
-- **GitHub Issues**: [Report a bug](https://github.com/yourusername/SystemRestorePointCreator/issues)
-- **GitHub Discussions**: [Start a discussion](https://github.com/yourusername/SystemRestorePointCreator/discussions)
+- **GitHub Issues**: [Report a bug](https://github.com/ThanhNguyenVN93/Create-System-Restore-Point-Tool/issues)
+- **GitHub Discussions**: [Start a discussion](https://github.com/ThanhNguyenVN93/Create-System-Restore-Point-Tool/discussions)
 
 ## 🔄 Version History
 
@@ -255,6 +255,6 @@ For issues, questions, or suggestions:
 
 ---
 
-**Created with ❤️ by [Your Name]**
+**Created with ❤️ by Nguyen Thanh**
 
-Last updated: 2024-03-20
+Last updated: 2026-09-05
