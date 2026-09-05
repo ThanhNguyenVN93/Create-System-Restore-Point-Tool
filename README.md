@@ -3,7 +3,7 @@
 A professional Windows Forms application that makes creating system restore points easy and safe. Create manual restore points before making system changes with a modern, user-friendly interface.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![.NET Framework](https://img.shields.io/badge/.NET%20Framework-4.8-blue)](https://dotnet.microsoft.com/)
+[![.NET Framework](https://img.shields.io/badge/.NET%20Framework-4.8%20%7C%203.5-blue)](https://dotnet.microsoft.com/)
 [![C#](https://img.shields.io/badge/C%23-7.3-green)](https://docs.microsoft.com/en-us/dotnet/csharp/)
 
 ## ✨ Features
@@ -45,15 +45,22 @@ A professional Windows Forms application that makes creating system restore poin
 ## 🚀 Installation
 
 ### Requirements
-- **Windows 7** or later
-- **.NET Framework 4.8**
+- **Windows 7 SP1** or later
+- **.NET Framework 4.8** (or **.NET Framework 3.5** — a separate build is provided for machines without 4.8)
 - **Administrator privileges** (for creating restore points)
 - **System Protection enabled** on C: drive
 
 ### Download
-1. Download the latest release from [Releases](https://github.com/ThanhNguyenVN93/Create-System-Restore-Point-Tool/releases)
-2. Extract the files
-3. Run `Create System Restore Point Tool.exe`
+Pick the build that matches what's installed on your machine:
+- **[.NET Framework 4.8 build](https://github.com/ThanhNguyenVN93/Create-System-Restore-Point-Tool/releases/download/v1.0.3/CreateSystemRestorePointTool-v1.0.3-net48.zip)** — use this unless you know you don't have .NET 4.8
+- **[.NET Framework 3.5 build](https://github.com/ThanhNguyenVN93/Create-System-Restore-Point-Tool/releases/download/v1.0.3/CreateSystemRestorePointTool-v1.0.3-net35.zip)** — for machines with only .NET Framework 3.5
+
+Not sure which one, or want it picked automatically? Grab the [combined package with `Launch.bat`](https://github.com/ThanhNguyenVN93/Create-System-Restore-Point-Tool/releases/tag/v1.0.2) instead — it detects your installed .NET version and runs the right build (and tries to silently enable .NET 3.5 if neither is present).
+
+See all builds on the [Releases page](https://github.com/ThanhNguyenVN93/Create-System-Restore-Point-Tool/releases).
+
+1. Extract the zip
+2. Run `Create System Restore Point Tool.exe`
 
 ### Build from Source
 ```bash
@@ -124,7 +131,7 @@ Remove-Item -Path "$env:APPDATA\WindowsFormsApp1\restorepoint.cfg" -Force
 | Requirement | Minimum | Recommended |
 |-------------|---------|-------------|
 | OS | Windows 7 SP1 | Windows 10/11 |
-| .NET Framework | 4.8 | 4.8+ |
+| .NET Framework | 3.5 or 4.8 | 4.8+ |
 | RAM | 512 MB | 2 GB |
 | Disk Space | 50 MB | 100 MB |
 | Admin Rights | Required | Required |
@@ -185,14 +192,21 @@ frm_Create_System_Restore_Point_Tool.cs
 ├─ Form1_Load()              - Initialize and check restrictions
 ├─ CheckCreateRestriction()  - 3-month limitation check
 ├─ CheckSystemStatus()       - Display system information
+├─ CheckSystemProtection()   - Detect System Protection status
+├─ btnFixProtection_Click()  - Enable System Protection (elevated)
 ├─ button1_Click()           - Create restore point handler
 ├─ SaveLastCreateDate()      - Persist creation timestamp
-├─ RunElevatedWithExitCode() - Execute PowerShell as admin
+├─ RunElevatedScript()       - Execute a PowerShell script as admin
 └─ SetFormIcon()             - Load and set application icon
 
 frm_Create_System_Restore_Point_Tool.Designer.cs
 └─ InitializeComponent()     - UI layout and styling
 ```
+
+### Builds
+- **`WindowsFormsApp1.csproj`** - targets .NET Framework 4.8
+- **`WindowsFormsApp1.Net35.csproj`** - targets .NET Framework 3.5, same source files, for machines without 4.8
+- **`Launch.bat`** - picks the right build automatically and can silently enable .NET Framework 3.5 via DISM if neither is present
 
 ## 🤝 Contributing
 
@@ -231,7 +245,20 @@ For issues, questions, or suggestions:
 
 ## 🔄 Version History
 
-### v1.0.0 (Current)
+### v1.0.3 (Current)
+- ✅ .NET 4.8 and .NET 3.5 builds published as separate downloads
+
+### v1.0.2
+- ✅ Accurate Windows version/bitness display
+- ✅ Minimum OS enforcement (Windows 7 SP1+)
+- ✅ .NET Framework 3.5 fallback build
+- ✅ `Launch.bat` auto-picks the right build and can silently enable .NET 3.5
+
+### v1.0.1
+- ✅ One-click "Enable" button for System Protection
+- ✅ Fixed custom restore point description being ignored
+
+### v1.0.0
 - ✅ Initial release
 - ✅ Create restore points
 - ✅ 3-month restriction
@@ -257,4 +284,4 @@ For issues, questions, or suggestions:
 
 **Created with ❤️ by Nguyen Thanh**
 
-Last updated: 2026-09-05
+Last updated: 2026-09-05 (v1.0.3)
