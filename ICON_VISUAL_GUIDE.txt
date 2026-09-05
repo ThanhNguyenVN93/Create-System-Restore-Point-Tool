@@ -1,0 +1,291 @@
+# 🎨 Icon Setup - Visual Guide
+
+## Generated Icon Preview
+
+```
+Generated Icon (32x32 pixels):
+
+┌────────────────────────────────┐
+│                                │
+│        ┌─────────────────┐      │
+│        │   ┌──────────┐  │      │
+│        │   │          │  │      │
+│        │   │   📁 📥  │  │      │
+│        │   │          │  │      │
+│        │   └──────────┘  │      │
+│        │ System Restore  │      │
+│        │   Point Tool    │      │
+│        └─────────────────┘      │
+│                                │
+│  Colors:                        │
+│  • Background: Blue (#0078D4)   │
+│  • Folder: White               │
+│  • Arrow: White (↓ restore)    │
+│                                │
+└────────────────────────────────┘
+
+Resolution: 32x32 pixels (optimized for Windows)
+Format: .ico (Windows icon format)
+Theme: Windows 10/11 blue theme
+```
+
+---
+
+## Step-by-Step Visual Guide
+
+### Step 1: Open Program.cs
+```
+Visual Studio
+├── Solution Explorer (Right side)
+│   ├── WindowsFormsApp1 (project)
+│   │   ├── Dependencies
+│   │   ├── Properties
+│   │   ├── Form1.cs
+│   │   ├── Form1.Designer.cs
+│   │   ├── Program.cs ← Double-click here
+│   │   └── ...
+```
+
+### Step 2: Find Main() function
+```csharp
+[STAThread]
+static void Main()  ← Find this function
+{
+    // Looking for this...
+}
+```
+
+### Step 3: Uncomment icon generator
+```csharp
+[STAThread]
+static void Main()
+{
+    IconGeneratorHelper.GenerateAndSaveIcon("app.ico");  ← Uncomment this line
+    
+    Application.EnableVisualStyles();
+    Application.SetCompatibleTextRenderingDefault(false);
+    Application.Run(new Form1());
+}
+```
+
+### Step 4: Run Application
+```
+Visual Studio Menu:
+Debug → Start Without Debugging (Ctrl+F5)
+
+Or Press: F5 (with debugging)
+
+Look for output: ✓ Icon generated: ...app.ico
+```
+
+### Step 5: Comment out generator
+```csharp
+// IconGeneratorHelper.GenerateAndSaveIcon("app.ico");  ← Comment out again
+```
+
+### Step 6: Set Icon in Visual Studio
+```
+1. Right-click Project
+   │
+   └─ Project → Properties (or right-click in Solution Explorer)
+      │
+      ├─ Application tab ← Click here
+      │  │
+      │  ├─ Icon and manifest:
+      │  │  │
+      │  │  └─ ⬜ (click this dropdown)
+      │  │     │
+      │  │     ├─ Browse... ← Click here
+      │  │     │
+      │  │     └─ Navigate to: D:\code\WindowsFormsApp1\app.ico
+```
+
+### Step 7: Verify
+```
+Visual Studio
+├── Project Properties Application tab
+│   ├─ Icon and manifest: ✓ Shows preview of your icon
+│   
+├─ Build Project (Ctrl+Shift+B)
+│  
+├─ Run Application (F5)
+│  ├─ Title bar: ✓ Icon appears
+│  ├─ Taskbar: ✓ Icon appears
+│  
+└─ Check .exe file
+   ├─ bin\Debug\WindowsFormsApp1.exe
+   └─ Properties → Details: ✓ Icon visible
+```
+
+---
+
+## File Structure After Icon Generation
+
+```
+D:\code\WindowsFormsApp1\
+│
+├── 📄 app.ico ← NEW! (generated icon file)
+├── 📄 Form1.cs
+├── 📄 Form1.Designer.cs
+├── 📄 Program.cs (modified)
+├── 📄 IconGenerator.cs
+├── 📄 IconGenerator_Helper.cs
+├── 📄 ICON_SETUP.md ← This file
+├── 📄 README.md
+├── 📄 LICENSE
+├── 📄 CONTRIBUTING.md
+│
+├── 📁 bin\
+│   ├── Debug\
+│   │   └── WindowsFormsApp1.exe (will have icon)
+│   └── Release\
+│       └── WindowsFormsApp1.exe (will have icon)
+│
+└── 📁 .github\
+    └── ...
+```
+
+---
+
+## Icon Appearance in Different Locations
+
+### 📱 Title Bar
+```
+┌─────────────────────────────────────────┐
+│ 📁 System Restore Point Creator   _ □ ✕  │
+├─────────────────────────────────────────┤
+│ (application content)                   │
+└─────────────────────────────────────────┘
+  ↑
+  Your icon appears here!
+```
+
+### 📋 Taskbar
+```
+Windows Taskbar:
+┌─────────────────────────────────────────────────────────┐
+│ 🪟  📁  🌐  📧  ...                                       │
+└─────────────────────────────────────────────────────────┘
+     ↑
+     Your icon shows here when app runs
+```
+
+### 📂 File Explorer
+```
+D:\code\WindowsFormsApp1\bin\Release\
+├── 📁 System Restore Point Creator.exe
+│   └─ Properties:
+│      ├─ 📁 Icon preview
+│      ├─ File type: Application
+│      └─ Size: (shows with your icon)
+```
+
+---
+
+## Troubleshooting Visual Guide
+
+### ❌ Icon doesn't appear in Application tab
+```
+Solution Flow:
+
+1. Check file exists?
+   ├─ Open File Explorer
+   ├─ Navigate to: D:\code\WindowsFormsApp1\
+   └─ Look for: app.ico ← Should exist here
+
+2. If NOT found:
+   ├─ Run Program again with uncommented line
+   ├─ Check Output window for: ✓ Icon generated
+   └─ If error appears, see error message
+
+3. If found:
+   ├─ Rebuild Project (Ctrl+Shift+B)
+   ├─ Close and reopen Visual Studio
+   └─ Try again
+```
+
+### ❌ Icon doesn't appear on .exe
+```
+Solution Flow:
+
+1. Verify icon is set in Project Properties
+   ├─ Right-click Project → Properties
+   └─ Application tab → Icon preview should show
+
+2. Clean and Rebuild
+   ├─ Build → Clean Solution
+   ├─ Build → Rebuild Solution
+   └─ Wait for completion
+
+3. Run application
+   ├─ F5 (Debug)
+   └─ Check title bar and taskbar
+```
+
+### ❌ "Failed to generate icon" error
+```
+Solution Flow:
+
+1. Check System.Drawing reference
+   ├─ Right-click Project
+   ├─ Add Reference
+   ├─ Assemblies → System.Drawing
+   └─ Make sure it's checked
+
+2. Check permissions
+   ├─ Run Visual Studio as Administrator
+   ├─ Try generating again
+   └─ F5
+
+3. Check disk space
+   ├─ Make sure D:\ has free space
+   ├─ Try saving to different location
+   └─ Verify temp folder access
+```
+
+---
+
+## Complete Icon Design
+
+```
+32x32 Icon Grid:
+
+┌────────────────────────────┐
+│ . . . . . . . . . . . . . .│
+│ . . . . . . . . . . . . . .│
+│ . . . . . . . . . . . . . .│  Background: Blue gradient
+│ . . . ┌──────────────┐ . .│  Blue: #0078D4 to #0064B4
+│ . . . │ ┌─────────┐  │ . .│
+│ . . . │ │ . . . .│  │ . .│
+│ . . . │ │ . ⬇️ . .│  │ . .│  Folder: White outline
+│ . . . │ │ . . . .│  │ . .│  Arrow: White (restore symbol)
+│ . . . │ └─────────┘  │ . .│
+│ . . . └──────────────┘ . .│
+│ . . . . . . . . . . . . . .│
+│ . . . . . . . . . . . . . .│
+└────────────────────────────┘
+
+Legend:
+─  = Folder border (white)
+⬇️  = Restore arrow (white)
+.  = Background (blue gradient)
+```
+
+---
+
+## After Icon Setup
+
+✅ Icon ready for:
+- Running locally
+- GitHub release
+- Distribution to users
+- Installation package
+- Taskbar pinning
+
+🎉 **Your application now has a professional icon!**
+
+---
+
+**Setup Time: ~2 minutes**  
+**Difficulty: Easy ⭐**  
+**Result: Professional Windows application icon** ✨

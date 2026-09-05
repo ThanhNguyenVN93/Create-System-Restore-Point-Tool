@@ -1,9 +1,0 @@
-This is a placeholder for app.ico file.
-In Visual Studio, you can:
-1. Right-click Project > Properties > Application
-2. Click "Icon and manifest" dropdown
-3. Select an icon file or create custom icon
-
-Recommended icon colors:
-- Blue (#0078D4) - matches Windows theme
-- Theme: System Restore/Backup

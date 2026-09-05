@@ -14,9 +14,11 @@ namespace WindowsFormsApp1
         [STAThread]
         static void Main()
         {
+            IconGeneratorHelper.GenerateAndSaveIcon("app.ico"); // UNCOMMENT THIS
+            
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new frm_Create_System_Restore_Point_Tool());
         }
     }
 }

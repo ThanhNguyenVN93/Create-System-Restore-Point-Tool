@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{4D11D76F-03DF-4F52-941E-FCAD88D98C23}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>frmsysresttool</RootNamespace>
+    <RootNamespace>frm_sys_rest_tool</RootNamespace>
     <AssemblyName>Create System Restore Point Tool</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>app.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System">
       <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8\System.dll</HintPath>
@@ -48,22 +51,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs" />
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="frm_Create_System_Restore_Point_Tool.cs" />
+    <Compile Include="frm_Create_System_Restore_Point_Tool.Designer.cs">
+      <DependentUpon>frm_Create_System_Restore_Point_Tool.cs</DependentUpon>
     </Compile>
+    <Compile Include="IconGenerator.cs" />
+    <Compile Include="IconGenerator_Helper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <None Include=".github\ISSUE_TEMPLATE\bug_report.md" />
     <None Include=".github\ISSUE_TEMPLATE\config.yml" />
     <None Include=".github\ISSUE_TEMPLATE\feature_request.md" />
@@ -71,6 +66,8 @@
     <None Include="CHANGELOG.md" />
     <None Include="CODE_OF_CONDUCT.md" />
     <None Include="CONTRIBUTING.md" />
+    <None Include="ICON_README.md" />
+    <None Include="ICON_SETUP.md" />
     <None Include="INSTALLATION.md" />
     <None Include="LICENSE" />
     <None Include="Properties\Settings.settings">
@@ -90,7 +87,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
-    <Content Include="app.ico.txt" />
+    <Content Include="app.ico" />
+    <Content Include="ICON_VISUAL_GUIDE.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

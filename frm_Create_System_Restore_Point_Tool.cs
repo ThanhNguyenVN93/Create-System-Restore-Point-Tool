@@ -19,13 +19,13 @@ namespace WindowsFormsApp1
         public static extern IntPtr ExtractIcon(IntPtr hInst, string lpszExeFileName, int nIconIndex);
     }
 
-    public partial class Form1 : Form
+    public partial class frm_Create_System_Restore_Point_Tool : Form
     {
         private const string REGISTRY_KEY = @"HKEY_CURRENT_USER\Software\WindowsFormsApp1\RestorePoint";
         private const string LAST_CREATE_DATE = "LastCreateDate";
         private const int DAYS_BETWEEN_CREATES = 90; // 3 months
 
-        public Form1()
+        public frm_Create_System_Restore_Point_Tool()
         {
             InitializeComponent();
         }

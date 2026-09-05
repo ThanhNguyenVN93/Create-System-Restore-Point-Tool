@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Create System Restore Point Tool")]
-[assembly: AssemblyDescription("frmsysresttool")]
+[assembly: AssemblyDescription("Creates a Windows System Restore Point on demand, with a 90-day cooldown, system protection and free disk space checks.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("PyC Code and Tool")]
 [assembly: AssemblyProduct("Create System Restore Point Tool")]
-[assembly: AssemblyCopyright("Copyright ©  2026")]
+[assembly: AssemblyCopyright("Copyright © PyC Code and Tool 2026")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

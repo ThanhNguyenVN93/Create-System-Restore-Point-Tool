@@ -1,6 +1,6 @@
 namespace WindowsFormsApp1
 {
-    partial class Form1
+    partial class frm_Create_System_Restore_Point_Tool
     {
         private System.ComponentModel.IContainer components = null;
 
@@ -139,7 +139,7 @@ namespace WindowsFormsApp1
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = true;
-            this.Name = "Form1";
+            this.Name = "frm_Create_System_Restore_Point_Tool";
             this.ShowIcon = true;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "System Restore Point Creator";
