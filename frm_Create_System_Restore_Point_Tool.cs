@@ -5,8 +5,8 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Management;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Win32;
 
@@ -204,12 +204,54 @@ namespace WindowsFormsApp1
             {
                 CheckSystemProtection();
                 CheckDiskSpace();
-                lblWindowsVersion.Text = $"✓ Windows: {Environment.OSVersion.VersionString}";
+                lblWindowsVersion.Text = $"✓ Windows: {GetWindowsVersionString()}";
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"Error checking system status: {ex.Message}");
             }
+        }
+
+        private string GetWindowsVersionString()
+        {
+            try
+            {
+                // Source - https://stackoverflow.com/a/50224392
+                // Posted by Rovann Linhalis
+                // Retrieved 2026-09-05, License - CC BY-SA 4.0
+                string r = "";
+                using (ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem"))
+                {
+                    ManagementObjectCollection information = searcher.Get();
+                    if (information != null)
+                    {
+                        foreach (ManagementObject obj in information)
+                        {
+                            r = obj["Caption"].ToString() + " - " + obj["OSArchitecture"].ToString();
+                        }
+                    }
+                    r = r.Replace("NT 5.1.2600", "XP");
+                    r = r.Replace("NT 5.2.3790", "Server 2003");
+                }
+
+                return string.IsNullOrEmpty(r.Trim()) ? Environment.OSVersion.VersionString : ShortenWindowsVersionString(r);
+            }
+            catch
+            {
+                return Environment.OSVersion.VersionString;
+            }
+        }
+
+        private string ShortenWindowsVersionString(string fullVersionString)
+        {
+            // "Microsoft Windows 11 Pro for Workstations - 64-bit" -> "Windows 11 - 64bit"
+            var nameMatch = System.Text.RegularExpressions.Regex.Match(fullVersionString, @"Windows\s+(Server\s+)?\d+(\.\d+)?");
+            string namePart = nameMatch.Success ? nameMatch.Value : fullVersionString;
+
+            var bitMatch = System.Text.RegularExpressions.Regex.Match(fullVersionString, @"(\d+)\s*-?\s*bit");
+            string bitPart = bitMatch.Success ? $"{bitMatch.Groups[1].Value}bit" : "";
+
+            return string.IsNullOrEmpty(bitPart) ? namePart : $"{namePart} - {bitPart}";
         }
 
         private void CheckSystemProtection()
@@ -344,17 +386,14 @@ namespace WindowsFormsApp1
                     );
 
                     // Auto-close after 2 seconds
-                    Task.Delay(2000).ContinueWith(_ =>
+                    var autoCloseTimer = new System.Windows.Forms.Timer { Interval = 2000 };
+                    autoCloseTimer.Tick += (timerSender, timerArgs) =>
                     {
-                        if (this.InvokeRequired)
-                        {
-                            this.Invoke(new Action(() => this.Close()));
-                        }
-                        else
-                        {
-                            this.Close();
-                        }
-                    });
+                        autoCloseTimer.Stop();
+                        autoCloseTimer.Dispose();
+                        this.Close();
+                    };
+                    autoCloseTimer.Start();
                 }
                 else
                 {
